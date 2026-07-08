@@ -12,3 +12,7 @@ dist/
 *.db
 *.sqlite3
 *.sqlite
+
+# Local dev logs
+*.out
+*.err

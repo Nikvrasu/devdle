@@ -5,6 +5,7 @@ from slowapi.errors import RateLimitExceeded
 
 from app.config import settings
 from app.limiter import limiter
+from app.routers import auth as auth_router
 from app.routers import game as game_router
 
 app = FastAPI(title="Bugdle")
@@ -31,4 +32,5 @@ def health():
 
 
 app.include_router(game_router.router)
+app.include_router(auth_router.router)
 
