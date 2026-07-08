@@ -79,4 +79,6 @@ export const api = {
   refresh: () =>
     request("/api/auth/refresh", { method: "POST", retry: false }),
   logout: () => request("/api/auth/logout", { method: "POST", retry: false }),
+
+  stats: () => request("/api/stats"),
 }

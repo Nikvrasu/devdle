@@ -1,11 +1,12 @@
 import { useState } from "react"
 import Game from "./pages/Game"
 import Login from "./pages/Login"
+import Stats from "./pages/Stats"
 import { useAuth } from "./context/AuthContext"
 
 export default function App() {
   const { user, logout } = useAuth()
-  const [view, setView] = useState("game") // "game" | "login"
+  const [view, setView] = useState("game") // "game" | "login" | "stats"
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -16,7 +17,15 @@ export default function App() {
         >
           Bugdle
         </button>
-        <nav>
+        <nav className="flex items-center gap-3">
+          {user && (
+            <button
+              onClick={() => setView("stats")}
+              className="text-sm font-medium text-slate-600 hover:text-indigo-600"
+            >
+              Stats
+            </button>
+          )}
           {user ? (
             <div className="flex items-center gap-3">
               <span className="text-sm text-slate-600">{user.username}</span>
@@ -40,7 +49,15 @@ export default function App() {
           )}
         </nav>
       </header>
-      <main>{view === "game" ? <Game /> : <Login onDone={() => setView("game")} />}</main>
+      <main>
+        {view === "game" ? (
+          <Game />
+        ) : view === "stats" ? (
+          <Stats />
+        ) : (
+          <Login onDone={() => setView("game")} />
+        )}
+      </main>
     </div>
   )
 }
