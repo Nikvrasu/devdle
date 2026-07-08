@@ -1,0 +1,243 @@
+{
+  "scenarios": [
+    {
+      "answer": "Connection pool exhaustion",
+      "category": "concurrency",
+      "difficulty": "medium",
+      "active_date": "2026-07-08",
+      "clues": [
+        "Under heavy traffic the site suddenly starts failing to load, then recovers on its own a few minutes later.",
+        "The failures line up with spikes in concurrent users, not with a code deploy or config change.",
+        "Error logs mention the app can't get a database connection, yet the database itself shows low CPU and is responsive.",
+        "The number of open connections to the database caps out at a fixed small number no matter how much traffic grows.",
+        "The connection pool max size is too low and connections aren't returned fast enough, so every pooled connection is checked out and new requests block until they time out."
+      ]
+    },
+    {
+      "answer": "N+1 query problem",
+      "category": "data",
+      "difficulty": "easy",
+      "active_date": "2026-07-09",
+      "clues": [
+        "A page that lists items gets slower and slower as the list grows, even though each item is simple.",
+        "Response time scales with the number of rows returned, not with the complexity of any single row.",
+        "The server log shows one query to fetch the list, then a separate near-identical query for almost every single row.",
+        "The repeated queries all fetch the same related child table keyed by the parent id.",
+        "The ORM lazy-loads the child relation inside a loop, issuing one query per parent row instead of a single joined or batched query (the classic N+1)."
+      ]
+    },
+    {
+      "answer": "Missing database index",
+      "category": "data",
+      "difficulty": "easy",
+      "active_date": "2026-07-10",
+      "clues": [
+        "A search that used to feel instant now takes many seconds, and only started slowing down recently.",
+        "The slowdown began around the time the table passed a few million rows.",
+        "The slow query filters or sorts on a column that is used in almost every request.",
+        "EXPLAIN shows the database doing a full sequential scan of the whole table for that query.",
+        "The frequently filtered or sorted column has no index, so the planner scans every row; adding a B-tree index removes the seq scan."
+      ]
+    },
+    {
+      "answer": "Race condition",
+      "category": "concurrency",
+      "difficulty": "hard",
+      "active_date": "2026-07-11",
+      "clues": [
+        "Two people editing the same record sometimes lose each other's changes without either of them noticing.",
+        "The lost data only shows up when two saves happen within the same second or two.",
+        "The save path reads the current value, computes a new value in the app, then writes it back.",
+        "Neither write checks whether the record changed since it was read; both overwrite the whole row.",
+        "There is a read-modify-write without locking or optimistic concurrency (no version check), so concurrent transactions clobber each other's updates (a lost update)."
+      ]
+    },
+    {
+      "answer": "Cache stampede",
+      "category": "caching",
+      "difficulty": "medium",
+      "active_date": "2026-07-12",
+      "clues": [
+        "Every so often the database gets a brief, intense burst of identical heavy queries, then goes quiet.",
+        "The spikes happen like clockwork at regular intervals rather than with traffic.",
+        "The burst always follows the moment a popular cached item's time-to-live runs out.",
+        "Many requests all see the cache miss at the same instant and each triggers the same expensive lookup.",
+        "At TTL expiry all clients recompute the value simultaneously (a cache stampede); fix with single-flight/locking or early refresh with jittered TTLs."
+      ]
+    },
+    {
+      "answer": "Timezone/DST handling bug",
+      "category": "scheduling",
+      "difficulty": "medium",
+      "active_date": "2026-07-13",
+      "clues": [
+        "Some scheduled jobs ran an hour early or late on a particular day, and only that day.",
+        "The off-by-an-hour events all happened around the start or end of daylight saving time.",
+        "Timestamps are stored and compared as local wall-clock times instead of absolute instants.",
+        "Two events an hour apart collapsed into the same timestamp, or an hour went missing or repeated.",
+        "The code treats naive local times as absolute, so the DST spring-forward/fall-back shift moves scheduled times; store UTC and convert only for display."
+      ]
+    },
+    {
+      "answer": "Memory leak",
+      "category": "infra",
+      "difficulty": "easy",
+      "active_date": "2026-07-14",
+      "clues": [
+        "A service that ran fine for days starts getting sluggish, then crashes with out-of-memory.",
+        "Restarting the process fixes it temporarily, but memory climbs steadily again afterward.",
+        "Memory usage grows with the number of requests handled, not with the size of any single request.",
+        "A profile shows objects (caches, listeners, or closures) are allocated and never released.",
+        "References are held longer than needed (e.g. an ever-growing cache or uncleared event listeners), so the garbage collector never reclaims them; a memory leak."
+      ]
+    },
+    {
+      "answer": "Deadlock",
+      "category": "concurrency",
+      "difficulty": "hard",
+      "active_date": "2026-07-15",
+      "clues": [
+        "Rarely, two unrelated actions both fail at the same time with no obvious cause.",
+        "The failures happen only when the two operations run concurrently and in opposite orders.",
+        "Each failing transaction holds a lock the other one needs to proceed.",
+        "Logs show both transactions were rolled back by the database as victims of a cycle.",
+        "Two transactions acquire the same rows in different orders, forming a lock cycle the DB resolves by killing one (a deadlock); serialize lock order or keep transactions short."
+      ]
+    },
+    {
+      "answer": "Missing sticky sessions",
+      "category": "infra",
+      "difficulty": "medium",
+      "active_date": "2026-07-16",
+      "clues": [
+        "After logging in, users randomly get logged out or see empty carts as they click around.",
+        "The problem only appears once traffic is spread across more than one server.",
+        "Each request sometimes lands on a different backend instance than the previous one.",
+        "Session state lives in memory on the instance that first handled the login, not in a shared store.",
+        "Requests aren't pinned to the instance that holds the session (no sticky sessions and no shared session store), so a different instance can't see the session."
+      ]
+    },
+    {
+      "answer": "Character encoding bug",
+      "category": "encoding",
+      "difficulty": "easy",
+      "active_date": "2026-07-17",
+      "clues": [
+        "Names with accents or emoji show up as question marks or weird symbols after saving.",
+        "The corruption only happens for non-ASCII characters; plain ASCII is fine.",
+        "The bytes are correct in the browser but wrong once they reach the database or a file.",
+        "Some layer is decoding UTF-8 bytes as Latin-1 (or a similar mismatch) somewhere in the pipeline.",
+        "Text is interpreted with the wrong character encoding (e.g. UTF-8 read as Latin-1), so multibyte characters get mangled; set UTF-8 end to end."
+      ]
+    },
+    {
+      "answer": "Rate limiter false positive",
+      "category": "infra",
+      "difficulty": "easy",
+      "active_date": "2026-07-18",
+      "clues": [
+        "A known-good integration suddenly starts getting rejected even though its calls are valid.",
+        "The rejections began after that client's normal traffic grew a bit busier than usual.",
+        "The errors are 429 Too Many Requests keyed by the client's IP or account.",
+        "The limit is a fixed threshold with no allowance for this client's expected volume.",
+        "A one-size-fits-all rate limit treats a legitimate high-volume client as abuse; use an allowlist or per-tier quotas."
+      ]
+    },
+    {
+      "answer": "Off-by-one pagination error",
+      "category": "data",
+      "difficulty": "medium",
+      "active_date": "2026-07-19",
+      "clues": [
+        "The last page of results is either empty or shows one item repeated from the previous page.",
+        "Users report the final record is missing, or that scrolling never quite ends.",
+        "The bug appears exactly at the boundary between two pages of data.",
+        "The slice uses something like limit/offset with an inclusive end instead of exclusive.",
+        "The pagination uses an off-by-one (e.g. offset..offset+limit inclusive, or wrong < versus <=), dropping or duplicating the boundary row."
+      ]
+    },
+    {
+      "answer": "Stale cache after write",
+      "category": "caching",
+      "difficulty": "easy",
+      "active_date": "2026-07-20",
+      "clues": [
+        "After updating a record, the old value keeps showing up for a while.",
+        "A refresh or just waiting fixes it, and the stale view isn't consistent across users.",
+        "The read path serves a cached value that was never cleared when the data changed.",
+        "Writes update the database but never touch the corresponding cache key.",
+        "The cache key isn't invalidated (or updated) on write, so reads serve the previous value until it expires; a stale cache."
+      ]
+    },
+    {
+      "answer": "Thundering herd on restart",
+      "category": "infra",
+      "difficulty": "medium",
+      "active_date": "2026-07-21",
+      "clues": [
+        "Right after a deploy or restart, the service is slow to become healthy and sometimes falls over.",
+        "The trouble is a single huge spike the moment the service comes back online.",
+        "Every connected client reconnects and re-requests everything at the exact same instant.",
+        "There's no staggering: all background jobs and warm-up tasks fire simultaneously on boot.",
+        "On restart all clients and workers wake at once (a thundering herd); add jitter, backoff, and lazy warm-up so load ramps instead of spiking."
+      ]
+    },
+    {
+      "answer": "Floating point precision error",
+      "category": "precision",
+      "difficulty": "medium",
+      "active_date": "2026-07-22",
+      "clues": [
+        "Totals are off by a cent here and there, and never by a round amount.",
+        "The discrepancies show up only for certain prices or quantities, not others.",
+        "The math looks correct in code but the stored or displayed numbers have long decimal tails.",
+        "Values are stored and added as binary floating point (float/double).",
+        "Money is computed with binary floats, so rounding error accumulates (e.g. 0.1 + 0.2 != 0.3); use integer cents or decimal types."
+      ]
+    }
+  ],
+  "answer_pool": [
+    "Connection pool exhaustion",
+    "N+1 query problem",
+    "Missing database index",
+    "Race condition",
+    "Cache stampede",
+    "Timezone/DST handling bug",
+    "Memory leak",
+    "Deadlock",
+    "Missing sticky sessions",
+    "Character encoding bug",
+    "Rate limiter false positive",
+    "Off-by-one pagination error",
+    "Stale cache after write",
+    "Thundering herd on restart",
+    "Floating point precision error",
+    "Thread pool exhaustion",
+    "Connection leak",
+    "Slow query without index",
+    "Full table scan",
+    "SELECT * overuse",
+    "Unbounded result set",
+    "Optimistic locking conflict",
+    "Two-phase commit failure",
+    "Cache penetration",
+    "Cache avalanche",
+    "Cache key collision",
+    "Write-write conflict",
+    "Time skew between servers",
+    "Leap second bug",
+    "Cron timezone misconfiguration",
+    "OOM killer",
+    "CPU starvation",
+    "GC pause",
+    "Load balancer health-check flapping",
+    "Session fixation",
+    "Unicode normalization mismatch",
+    "JSON date encoding bug",
+    "Integer overflow",
+    "Rounding error on display",
+    "Double-counted events",
+    "Duplicate event processing",
+    "Missing idempotency key"
+  ]
+}

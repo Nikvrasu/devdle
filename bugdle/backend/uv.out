@@ -1,0 +1,27 @@
+INFO:     127.0.0.1:54063 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54063 - "GET /api/game/today HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55628 - "GET /api/game/today HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55629 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55630 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55631 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55632 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55633 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55634 - "POST /api/game/guess HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:55635 - "POST /api/game/guess HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:55639 - "GET /api/game/today HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55640 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55641 - "GET /api/game/today HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55642 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55643 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55644 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55645 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55646 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55647 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55648 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55649 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55650 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55651 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55652 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55653 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55654 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55655 - "POST /api/game/guess HTTP/1.1" 429 Too Many Requests
