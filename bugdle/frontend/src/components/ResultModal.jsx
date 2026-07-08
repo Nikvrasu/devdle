@@ -10,7 +10,7 @@ function buildEmojiGrid(correct, guessesRemaining) {
   return "🟥".repeat(5)
 }
 
-export default function ResultModal({ correct, correctAnswer, guessesRemaining }) {
+export default function ResultModal({ correct, correctAnswer, guessesRemaining, onClose }) {
   const { user } = useAuth()
   const [copied, setCopied] = useState(false)
   const [condensed, setCondensed] = useState(null)
@@ -40,7 +40,14 @@ export default function ResultModal({ correct, correctAnswer, guessesRemaining }
 
   return (
     <div className="fixed inset-0 z-20 flex items-center justify-center bg-black/40 p-4">
-      <div className="w-full max-w-sm rounded-xl bg-white p-6 shadow-xl">
+      <div className="relative w-full max-w-sm rounded-xl bg-white p-6 shadow-xl">
+        <button
+          onClick={onClose}
+          aria-label="Close"
+          className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+        >
+          ✕
+        </button>
         <h2
           className={`mb-2 text-center text-2xl font-bold ${
             correct ? "text-green-600" : "text-red-600"

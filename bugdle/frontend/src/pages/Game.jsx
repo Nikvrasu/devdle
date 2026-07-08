@@ -16,6 +16,7 @@ export default function Game() {
   const [state, setState] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [dismissed, setDismissed] = useState(false)
 
   // On mount: prefer the saved game (so a refresh resumes) over a fresh fetch.
   useEffect(() => {
@@ -39,6 +40,11 @@ export default function Game() {
   // Persist the current game so a refresh resumes rather than restarting.
   useEffect(() => {
     if (state) localStorage.setItem(storageKey(), JSON.stringify(state))
+  }, [state])
+
+  // Show the result modal again for a fresh (non-finished) game.
+  useEffect(() => {
+    if (state && !state.game_over) setDismissed(false)
   }, [state])
 
   const handleGuess = (answer) => {
@@ -85,6 +91,21 @@ export default function Game() {
         ))}
       </div>
 
+      {state.game_over && (
+        <div
+          className={`mt-3 rounded-lg border p-4 ${
+            state.correct
+              ? "border-green-300 bg-green-50 text-green-800"
+              : "border-slate-300 bg-slate-50 text-slate-700"
+          }`}
+        >
+          <div className="text-xs font-semibold uppercase tracking-wide opacity-70">
+            Solution
+          </div>
+          <div className="mt-1 text-lg font-semibold">{state.correct_answer}</div>
+        </div>
+      )}
+
       {!state.game_over && (
         <div className="mt-4">
           <GuessInput
@@ -95,11 +116,12 @@ export default function Game() {
         </div>
       )}
 
-      {state.game_over && (
+      {state.game_over && !dismissed && (
         <ResultModal
           correct={state.correct}
           correctAnswer={state.correct_answer}
           guessesRemaining={state.guesses_remaining}
+          onClose={() => setDismissed(true)}
         />
       )}
     </div>
