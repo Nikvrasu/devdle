@@ -1,0 +1,55 @@
+  INFO:     127.0.0.1:57679 - "OPTIONS /api/auth/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64533 - "OPTIONS /api/auth/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56551 - "POST /api/auth/refresh HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:61430 - "POST /api/auth/refresh HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:50668 - "OPTIONS /api/game/today HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49657 - "OPTIONS /api/auth/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52817 - "OPTIONS /api/auth/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59553 - "OPTIONS /api/game/today HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57890 - "GET /api/game/today HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54549 - "POST /api/auth/refresh HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:57890 - "POST /api/auth/refresh HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54549 - "GET /api/game/today HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59553 - "OPTIONS /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54549 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52892 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52892 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52892 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62486 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53478 - "POST /api/auth/refresh HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:61908 - "POST /api/auth/refresh HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:53852 - "OPTIONS /api/auth/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57666 - "POST /api/auth/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53852 - "OPTIONS /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53852 - "OPTIONS /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57666 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57666 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50943 - "POST /api/auth/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50943 - "POST /api/auth/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50943 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50943 - "GET /api/stats HTTP/1.1" 200 OK
+ INFO:     127.0.0.1:49933 - "POST /api/auth/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49934 - "GET /api/game/today HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49936 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49940 - "GET /api/stats HTTP/1.1" 200 OK
+  INFO:     127.0.0.1:51613 - "POST /api/auth/register HTTP/1.1" 200 OK
+ INFO:     127.0.0.1:51615 - "GET /api/game/today HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51622 - "POST /api/game/guess HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51623 - "GET /api/stats HTTP/1.1" 200 OK
+ INFO:     127.0.0.1:51631 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50063 - "OPTIONS /api/auth/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56777 - "OPTIONS /api/auth/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55133 - "POST /api/auth/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55326 - "POST /api/auth/refresh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55326 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55133 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56777 - "OPTIONS /api/auth/logout HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55133 - "POST /api/auth/logout HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49601 - "POST /api/auth/register HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:49601 - "POST /api/auth/register HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:52221 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49601 - "POST /api/auth/login HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:49601 - "POST /api/auth/refresh HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64333 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64333 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64333 - "GET /api/stats HTTP/1.1" 200 OK
