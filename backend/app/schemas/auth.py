@@ -1,8 +1,10 @@
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, EmailStr, field_validator
 
 
 class RegisterRequest(BaseModel):
-    email: str
+    # EmailStr enforces format server-side; never trust the client's
+    # type="email" check as the only guard (the JS may not run at all).
+    email: EmailStr
     username: str
     password: str
 
@@ -18,7 +20,7 @@ class RegisterRequest(BaseModel):
 # Login is by EMAIL (documented decision). The brief allowed email OR username;
 # email is chosen to keep the lookup unambiguous and the rate-limit key stable.
 class LoginRequest(BaseModel):
-    email: str
+    email: EmailStr
     password: str
 
 

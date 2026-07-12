@@ -1,6 +1,7 @@
 import json
 import os
 import random
+from datetime import datetime, timedelta, timezone
 
 from fastapi import HTTPException
 from jose import JWTError, jwt
@@ -36,11 +37,20 @@ _ANSWER_POOL = _SEED_DATA.get("answer_pool", [])
 
 
 def _create_token(scenario_id: int, guesses_used: int, clues_revealed: int, solved: bool) -> str:
+    # Expire at the next local midnight so an in-progress attempt cannot be
+    # carried into the following day's puzzle (the puzzle is daily). A token
+    # past its `exp` is rejected by jwt.decode with a JWTError, which the call
+    # sites already map to a 401 — no extra handling needed here.
+    local_now = datetime.now()
+    exp = (local_now + timedelta(days=1)).replace(
+        hour=0, minute=0, second=0, microsecond=0
+    ).astimezone(timezone.utc)
     payload = {
         "scenario_id": scenario_id,
         "guesses_used": guesses_used,
         "clues_revealed": clues_revealed,
         "solved": solved,
+        "exp": exp,
     }
     return jwt.encode(payload, SECRET, algorithm=ALGORITHM)
 
