@@ -4,7 +4,7 @@
       "answer": "Connection pool exhaustion",
       "category": "concurrency",
       "difficulty": "medium",
-      "active_date": "2026-07-08",
+      "active_date": "2026-08-15",
       "clues": [
         "Under heavy traffic the site suddenly starts failing to load, then recovers on its own a few minutes later.",
         "The failures line up with spikes in concurrent users, not with a code deploy or config change.",
@@ -17,7 +17,7 @@
       "answer": "N+1 query problem",
       "category": "data",
       "difficulty": "easy",
-      "active_date": "2026-07-09",
+      "active_date": "2026-08-16",
       "clues": [
         "A page that lists items gets slower and slower as the list grows, even though each item is simple.",
         "Response time scales with the number of rows returned, not with the complexity of any single row.",
@@ -30,7 +30,7 @@
       "answer": "Missing database index",
       "category": "data",
       "difficulty": "easy",
-      "active_date": "2026-07-10",
+      "active_date": "2026-08-17",
       "clues": [
         "A search that used to feel instant now takes many seconds, and only started slowing down recently.",
         "The slowdown began around the time the table passed a few million rows.",
@@ -43,7 +43,7 @@
       "answer": "Race condition",
       "category": "concurrency",
       "difficulty": "hard",
-      "active_date": "2026-07-11",
+      "active_date": "2026-08-18",
       "clues": [
         "Two people editing the same record sometimes lose each other's changes without either of them noticing.",
         "The lost data only shows up when two saves happen within the same second or two.",
@@ -56,7 +56,7 @@
       "answer": "Cache stampede",
       "category": "caching",
       "difficulty": "medium",
-      "active_date": "2026-07-12",
+      "active_date": "2026-08-19",
       "clues": [
         "Every so often the database gets a brief, intense burst of identical heavy queries, then goes quiet.",
         "The spikes happen like clockwork at regular intervals rather than with traffic.",
@@ -69,7 +69,7 @@
       "answer": "Timezone/DST handling bug",
       "category": "scheduling",
       "difficulty": "medium",
-      "active_date": "2026-07-13",
+      "active_date": "2026-08-20",
       "clues": [
         "Some scheduled jobs ran an hour early or late on a particular day, and only that day.",
         "The off-by-an-hour events all happened around the start or end of daylight saving time.",
@@ -82,7 +82,7 @@
       "answer": "Memory leak",
       "category": "infra",
       "difficulty": "easy",
-      "active_date": "2026-07-14",
+      "active_date": "2026-08-21",
       "clues": [
         "A service that ran fine for days starts getting sluggish, then crashes with out-of-memory.",
         "Restarting the process fixes it temporarily, but memory climbs steadily again afterward.",
@@ -95,7 +95,7 @@
       "answer": "Deadlock",
       "category": "concurrency",
       "difficulty": "hard",
-      "active_date": "2026-07-15",
+      "active_date": "2026-08-22",
       "clues": [
         "Rarely, two unrelated actions both fail at the same time with no obvious cause.",
         "The failures happen only when the two operations run concurrently and in opposite orders.",
@@ -108,7 +108,7 @@
       "answer": "Missing sticky sessions",
       "category": "infra",
       "difficulty": "medium",
-      "active_date": "2026-07-16",
+      "active_date": "2026-08-23",
       "clues": [
         "After logging in, users randomly get logged out or see empty carts as they click around.",
         "The problem only appears once traffic is spread across more than one server.",
@@ -121,7 +121,7 @@
       "answer": "Character encoding bug",
       "category": "encoding",
       "difficulty": "easy",
-      "active_date": "2026-07-17",
+      "active_date": "2026-08-24",
       "clues": [
         "Names with accents or emoji show up as question marks or weird symbols after saving.",
         "The corruption only happens for non-ASCII characters; plain ASCII is fine.",
@@ -134,7 +134,7 @@
       "answer": "Rate limiter false positive",
       "category": "infra",
       "difficulty": "easy",
-      "active_date": "2026-07-18",
+      "active_date": "2026-08-25",
       "clues": [
         "A known-good integration suddenly starts getting rejected even though its calls are valid.",
         "The rejections began after that client's normal traffic grew a bit busier than usual.",
@@ -147,7 +147,7 @@
       "answer": "Off-by-one pagination error",
       "category": "data",
       "difficulty": "medium",
-      "active_date": "2026-07-19",
+      "active_date": "2026-08-26",
       "clues": [
         "The last page of results is either empty or shows one item repeated from the previous page.",
         "Users report the final record is missing, or that scrolling never quite ends.",
@@ -160,7 +160,7 @@
       "answer": "Stale cache after write",
       "category": "caching",
       "difficulty": "easy",
-      "active_date": "2026-07-20",
+      "active_date": "2026-08-27",
       "clues": [
         "After updating a record, the old value keeps showing up for a while.",
         "A refresh or just waiting fixes it, and the stale view isn't consistent across users.",
@@ -173,7 +173,7 @@
       "answer": "Thundering herd on restart",
       "category": "infra",
       "difficulty": "medium",
-      "active_date": "2026-07-21",
+      "active_date": "2026-08-28",
       "clues": [
         "Right after a deploy or restart, the service is slow to become healthy and sometimes falls over.",
         "The trouble is a single huge spike the moment the service comes back online.",
@@ -186,7 +186,7 @@
       "answer": "Floating point precision error",
       "category": "precision",
       "difficulty": "medium",
-      "active_date": "2026-07-22",
+      "active_date": "2026-08-29",
       "clues": [
         "Totals are off by a cent here and there, and never by a round amount.",
         "The discrepancies show up only for certain prices or quantities, not others.",
